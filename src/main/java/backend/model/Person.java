@@ -3,6 +3,7 @@ package backend.model;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
  * Created by beku on 10/8/2018.
  */
 @Table
-public class Person {
+public class Person implements Serializable {
     @PrimaryKey
     private UUID id;
     private String name;

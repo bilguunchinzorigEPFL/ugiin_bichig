@@ -3,6 +3,10 @@ package backend.dao;
 import backend.model.Person;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
+import com.hazelcast.config.Config;
+import com.hazelcast.config.EvictionPolicy;
+import com.hazelcast.config.MapConfig;
+import com.hazelcast.config.MaxSizeConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
@@ -33,6 +37,19 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Bean
+    public Config hazelcastConfig(){
+        return new Config()
+                .setInstanceName("hz-inst")
+                .addMapConfig(
+                        new MapConfig()
+                                .setName("sexy")
+                                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
+                                .setEvictionPolicy(EvictionPolicy.LRU)
+                                .setTimeToLiveSeconds(3600)
+                );
     }
 
     @Override
