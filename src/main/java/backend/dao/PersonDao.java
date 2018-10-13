@@ -1,11 +1,9 @@
 package backend.dao;
 
-import backend.model.Person;
+import backend.entities.Person;
 import org.springframework.data.repository.CrudRepository;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.UUID;
 
 /**

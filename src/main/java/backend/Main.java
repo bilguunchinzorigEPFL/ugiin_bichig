@@ -10,8 +10,8 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-public class MainController {
+public class Main {
     public static void main(String[] args){
-        SpringApplication.run(MainController.class,args);
+        SpringApplication.run(Main.class,args);
     }
 }

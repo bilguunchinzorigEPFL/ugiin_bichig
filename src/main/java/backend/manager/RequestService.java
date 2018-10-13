@@ -1,14 +1,11 @@
 package backend.manager;
 
 import backend.dao.PersonDao;
-import backend.model.Person;
-import com.datastax.driver.core.Session;
+import backend.entities.Person;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
 import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +17,8 @@ import java.util.*;
 @Service
 @CacheConfig(cacheNames = "sexy")
 public class RequestService {
-
     @Autowired
     private CassandraTemplate template;
-
     @Autowired
     private PersonDao personDao;
 
@@ -38,7 +33,7 @@ public class RequestService {
     }
 
     public void addPerson(Person person){
-        person.setId(UUID.randomUUID());
+        person.id=UUID.randomUUID();
         personDao.save(person);
     }
 

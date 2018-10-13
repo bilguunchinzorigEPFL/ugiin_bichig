@@ -1,8 +1,7 @@
 package backend.manager;
 
-import backend.model.Person;
+import backend.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
@@ -21,7 +20,7 @@ public class RequestController {
 
     @RequestMapping(value="/data",method=RequestMethod.GET)
     public Collection<Person> getAllPeople(){
-        return requestService.getAllPeople();
+            return requestService.getAllPeople();
     }
 
     @RequestMapping(value="/data/{id}",method = RequestMethod.GET)
@@ -41,7 +40,7 @@ public class RequestController {
 
     @RequestMapping(value="/data/{id}",method=RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updatePerson(@PathVariable("id") String id,@RequestBody Person person){
-        person.setId(UUID.fromString(id));
+        person.id=UUID.fromString(id);
         requestService.updatePerson(person);
     }
 

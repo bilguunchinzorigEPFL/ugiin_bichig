@@ -1,8 +1,5 @@
 package backend.dao;
 
-import backend.model.Person;
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
 import com.hazelcast.config.Config;
 import com.hazelcast.config.EvictionPolicy;
 import com.hazelcast.config.MapConfig;
@@ -10,12 +7,8 @@ import com.hazelcast.config.MaxSizeConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
-import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
-import org.springframework.data.cassandra.core.CassandraAdminOperations;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
-import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,7 +41,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
                                 .setName("sexy")
                                 .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
                                 .setEvictionPolicy(EvictionPolicy.LRU)
-                                .setTimeToLiveSeconds(3600)
+                                .setTimeToLiveSeconds(10)
                 );
     }
 
@@ -82,6 +75,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[] {"backend.model"};
+        return new String[] {"backend.entities"};
     }
 }
